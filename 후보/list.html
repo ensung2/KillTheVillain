@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미니게임스쿨</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        @font-face {
+    font-family: 'KCCMurukmuruk';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCCMurukmuruk.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KyoboHand';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+        @media (max-width : 767px) {
+            #blind {
+                display: block;
+                background: #000;
+                position: fixed;
+                top: 0;
+                z-index: 50;
+                width: 100%;
+                height: 100%;
+                color: #fff;
+                text-align: center;
+            }
+
+            .blind_title>b {
+                display: inline-block;
+                padding-bottom: 30px;
+            }
+
+            .material-symbols-outlined {
+                font-size: 5rem;
+                padding-top: 200px;
+                padding-bottom: 50px;
+            }
+        }
+
+        @media (min-width : 768px) {
+            #blind {
+                display: none;
+            }
+        }
+
+
+        /* 기본 설정 */
+        * {
+            margin: 0 auto;
+            padding: 0 auto;
+            box-sizing: border-box;
+            font-family: KyoboHand;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 전체 틀 설정 */
+        #wrap {
+            max-width: 768px;
+            height: 700px;
+            background: url(./img/main01.jpg) no-repeat top center;
+            background-size: cover;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        header {width: 100%;
+                height: 80px;
+                display: inline-block;
+                padding: 20px 30px;}
+        .back {width: 100px; float: left;}
+        .main_logo {
+            height: 80px;
+            justify-content: center;
+            
+        }
+        
+        .main_logo a
+            {display: inline-block;
+            padding-left: 170px;
+            font-family: KCCMurukmuruk;
+            font-size: 30px;
+            color: #2d2d2d;
+            cursor: pointer;
+        }
+
+        .main_logo a:hover {color: #23a4ff;}
+        
+        .game_list {display: flex;
+                    padding: 0 20px;
+                    height: 580px;
+                    align-items: center;
+                }
+
+        #game_box {width: 220px;
+                height: 400px;
+                border-radius: 10px;
+                background-color: #fff;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+                position: relative;
+                cursor: pointer;
+                }
+
+        #game_box:hover .game_intro {opacity: 100;
+            transition: all 0.5s;}
+        #game_box h2 {
+                    position: absolute;
+                    left: 50%;
+                    top: -40px;
+                    margin-left: -110px;
+                    font-size: 1.4rem;
+                    font-weight: bold;}
+        .game_intro {width: 220px;
+                    height: 400px;
+                    background: rgba(178, 232, 255, 0.3);
+                    border-radius: 10px;
+                    text-align: center;
+                    padding-top: 100px;
+                    opacity: 0; transition: all 0.5s;}
+        footer {
+            height: 20px;
+            font-size: 12px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="back">
+                <a href="./main.html"><img width="48" height="48" src="https://img.icons8.com/sf-regular-filled/48/228BE6/reply-arrow.png" alt="reply-arrow"/></a>
+            </div>
+            <div class="main_logo">
+                <a href="main.html">미니게임스쿨<span style="font-style: italic;">!</span></a>
+            </div>
+        </header>
+        
+
+        <div class="game_list">
+            <div id="game_box" class="game_01" onclick="location.href='game_01.html'">
+                <h2>1교시. 교수님과 틱택토!</h2>
+                <div class="game_intro">
+                    <span style="font-size: 1.5rem; font-weight: bold;">요즘 누가 바둑두나?</span><br><br>
+                    3x3판에서 가로,세로,대각선 중<br>
+                    어느 한 방향으로라도<br>3개가 이어지면 승리!<br><br>
+                    <b>&#62;&#62; 클릭시 게임시작 &#60;&#60;</b>
+                </div>
+            </div>
+            <div id="game_box" class="game_02" onclick="location.href='game_02.html'">
+                <h2>2교시. 조별과제 빌런잡기</h2>
+                <div class="game_intro">
+                    <span style="font-size: 1.5rem; font-weight: bold;">빌런..거기 멈춰!</span><br><br>
+                    키보드 ←, → 를 사용하여 무빙!<br>
+                    스페이스를 눌러서 총알을 날리고<br>꿀빨려는 조별과제 빌런 처치!<br><br>
+                    <b>&#62;&#62; 클릭시 게임시작 &#60;&#60;</b>
+                </div>
+            </div>
+            <div id="game_box" class="game_03" onclick="location.href='game_03.html'">
+                <h2>3교시. 같은 학점 찾기</h2>
+                <div class="game_intro">
+                    <span style="font-size: 1.5rem; font-weight: bold;">막판 학점 뒤집기!</span><br><br>
+                    초반 2초동안 카드를 잘 외워서<br>
+                    2개의 같은 카드를 맞추자!<br>모든 학점카드를 맞추면 A+!<br><br>
+                    <b>&#62;&#62; 클릭시 게임시작 &#60;&#60;</b>
+                </div>
+            </div>
+        </div>
+        <footer>Copyright 2023. ensung2</footer>
+
+    </div>
+
+    <!-- 창 크기 조절 -->
+    <div id="blind">
+        <div class="blind_title">
+            <span class="material-symbols-outlined">feedback</span><br>
+            <b style="font-size: 40px;">페이지 크기가 너무 작아요😥</b><br>
+            원활한 플레이를 위해 페이지 크기를 키워주세요!<br>(기본 가로 사이즈 : 768px)
+        </div>
+    </div>
+</body>
+</html>

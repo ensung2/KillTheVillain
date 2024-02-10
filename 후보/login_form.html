@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미니게임스쿨 - 로그인창</title>
+    <style>
+        /* 기본 설정 */
+        * {
+            margin: 0 auto;
+            padding: 0 auto;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 로그인 폼 화면 */
+        .login_box {
+            max-width: 768px;
+            height: 700px;
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+
+        }
+
+        #login_frm {
+            background: #fff;
+            width: 380px;
+            border-radius: 15px;
+            height: 420px;
+            padding: 50px 50px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #login_frm label {
+            font-size: 18px;
+        }
+
+        #login_frm label {
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 5px 0;
+            display: inline-block;
+        }
+
+        .fld_content input {
+            /* width:50%; */
+            height: 40px;
+            background: #fff;
+            border: 1px solid #ccc;
+        }
+
+        #submit_box input {
+            width: 280px;
+            height: 43px;
+            font-size: 1.1rem;
+            border: none;
+            background-color: rgb(26, 188, 156);
+            color: #fff;
+        }
+
+        #join_box {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="login_box">
+        <form id="login_frm" method="post" th:action="@{'/login'}">
+            <h1 style="font-size: 2.1rem;padding-bottom: 30px;">학사행정 로그인</h1>
+            <div id="id_box">
+
+                <div id="id_fld_err_pnl" class="fld_err_pnl"></div>
+                <div class="fld_content">
+                    <label for="id">학생명</label>
+                    <input type="text" id="id" name="username" size="20" minlength="2" maxlength="5"
+                        placeholder="학생명(ID)">
+                </div>
+
+            </div>
+
+            <div id="pw_box">
+
+                <div class="fld_content">
+                    <label for="id">비밀번호</label>
+                    <input type="password" id="pw" name="password" size="20" maxlength="20" placeholder="비밀번호">
+                </div>
+                <div id="id_fld_err_pnl"></div>
+            </div>
+            <div id="submit_box">
+                <input type="submit" id="login_btn" value="출석체크완료">
+            </div>
+            <div id="join_box">
+                <a href="#">학사등록하기</a>
+            </div>
+        </form>
+    </section>
+    <!-- ----------------------------------------------------------------- -->
+    <script>
+        function isCheckFldValid(fld, regex, initVal, errPnl, errMsg) {
+
+            // 리턴값 : 에러 점검 플래그
+            let fldCheckFlag = false;
+
+            // 체크 대상 필드 값 확인
+            console.log(`체크 대상 필드 값 : ${fld.value}`);
+
+            // 폼 유효성 점검(test)
+            console.log(`점검 여부 : ${regex.test(fld.value)}`);
+
+            if (regex.test(fld.value) == false) {
+
+                errPnl.style.paddingTop = "5px"; // 상단 내부 간격 조정
+                errPnl.style.height = "50px";
+                errPnl.innerHTML = errMsg;
+
+                // 기존 필드 데이터 초기화
+                // fld.value = "";
+                fld.value = initVal;
+                fld.focus(); // 재입력 준비     
+
+                fldCheckFlag = false;
+
+            } else { // 정상
+
+                // 에러 패널 초기화
+                errPnl.style.paddingTop = "0"; // 상단 내부 간격 초기화
+                errPnl.style.height = "0";
+                errPnl.innerHTML = "";
+
+                fldCheckFlag = true;
+            } // if
+
+            return fldCheckFlag;
+        } //
+
+        /////////////////////////////////////////////////////////////////////
+
+        window.onload = () => {
+
+            // 회원가입 버튼 인식
+            let joinBtn = document.getElementById("join_btn");
+
+            // 로그인 버튼 인식
+            let loginBtn = document.getElementById("login_btn");
+
+            // 아이디 필드 인식
+            let idFld = document.getElementById("id");
+
+            // 패쓰워드 필드 인식
+            let pwFld = document.getElementById("password");
+
+            // 아이디 점검 플래그 
+            let idCheckFlag = false;
+
+            // 패쓰워드 점검 플래그 
+            let pwCheckFlag = false;
+
+            // 아이디 에러 패널 인식
+            let idFldErrPnl = document.getElementById("id_fld_err_pnl");
+
+            // 패쓰워드 에러 패널 인식
+            let pwFldErrPnl = document.getElementById("password_fld_err_pnl");
+
+            //////////////////////////////////////////////////////////////////////////
+
+            // 아이디 필드 입력 이벤트 처리 : keyup
+            idFld.onkeyup = () => {
+
+                console.log("아이디 온키업");
+                idCheckFlag = isCheckFldValid(idFld,
+                    /^[가-힣]{1}\w{2,5}$/,
+                    idFld.value,
+                    idFldErrPnl,
+                    "2~5자의 한글을 입력하세요.");
+            } // idFld.onkeyup ... 
+
+            // 패쓰워드 필드 입력 이벤트 처리 : keyup
+            pwFld.onkeyup = (e) => {
+
+                console.log("패쓰워드 필드 keyup")
+                pwCheckFlag = isCheckFldValid(pwFld,
+                    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,20}/,
+                    pwFld.value,
+                    pwFldErrPnl,
+                    "회원 패쓰워드는 영문 대소/숫자/특수문자를 1개이상 포함하여 8~20자로 작성하십시오.");
+            } //     
+
+            /*
+                회원가입 버튼 이벤트 핸들러
+            */
+            joinBtn.onclick = () => {
+
+                // 회원가입 페이지로 이동
+                location.href = "member_join.html";
+            } //
+
+            /*
+                로그인 버튼 이벤트 핸들러
+            */
+
+            // 폼 태그 인식
+            let loginFrm = document.getElementById("login_frm");
+
+            loginFrm.onsubmit = () => {
+                // loginBtn.onclick = () => { 참고) 이런 경우에는 loginFrm.submit() 함수 사용하여 전송
+
+                alert("전송");
+
+                console.log(`idCheckFlag : ${idCheckFlag}`)
+                console.log(`pwCheckFlag : ${pwCheckFlag}`)
+
+                if (idCheckFlag == true && pwCheckFlag == true) {
+
+                    console.log("폼점검 성공");
+
+                } else {
+
+                    console.log("폼점검 오류");
+
+                    if (idCheckFlag == false) {
+
+                        idCheckFlag = isCheckFldValid(idFld,
+                            /^[a-zA-Z]{1}\w{7,19}$/,
+                            idFld.value,
+                            idFldErrPnl,
+                            "회원 아이디는 8~20사이의 영문으로 시작하여 영문 대소문자/숫자로 입력하십시오.");
+                    } // id 점검
+
+                    if (pwCheckFlag == false) {
+                        pwCheckFlag = isCheckFldValid(pwFld,
+                            /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,20}/,
+                            pwFld.value,
+                            pwFldErrPnl,
+                            "회원 패쓰워드는 영문 대소/숫자/특수문자를 1개이상 포함하여 8~20자로 작성하십시오.");
+                    } // pw 점검
+
+                    return false; // 전송 취소
+
+                } // if ...
+
+            } // onclick ...
+
+        }
+
+    </script>
+</body>
+
+</html>

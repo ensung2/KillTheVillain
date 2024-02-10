@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>같은 그림 맞추기 게임</title>
+    <style>
+        .game-board {
+            display: flex;
+            flex-wrap: wrap;
+            width: 500px;
+        }
+
+        .game-Card {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-board" id="gameBoard"></div>
+    <script>
+        const images = ["img/gameOver.png", "image2.jpg", "image3.jpg", "image4.jpg"];
+        const gameBoard = document.getElementById('gameBoard');
+        let firstCard = null;
+        let secondCard = null;
+
+        // 이미지를 섞기 위한 함수
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+
+            return array;
+        }
+
+        // 이미지 배열을 섞음
+        const shuffledImages = shuffle([...images, ...images]);
+
+        // 타일을 생성하고 게임 보드에 추가
+        shuffledImages.forEach((image, index) => {
+            const Card = document.createElement('div');
+            Card.className = 'game-Card';
+            Card.style.backgroundImage = `url(${image})`;
+
+            Card.addEventListener('click', () => {
+                if (!firstCard) {
+                    firstCard = { Card, index };
+                    Card.style.pointerEvents = 'none';
+                } else if (!secondCard && firstCard.index !== index) {
+                    secondCard = { Card, index };
+                    if (shuffledImages[firstCard.index] === shuffledImages[secondCard.index]) {
+                        // 일치하는 경우
+                        setTimeout(() => {
+                            firstCard.Card.style.visibility = 'hidden';
+                            secondCard.Card.style.visibility = 'hidden';
+                            firstCard = null;
+                            secondCard = null;
+                        }, 500);
+                    } else {
+                        // 일치하지 않는 경우
+                        setTimeout(() => {
+                            firstCard.Card.style.pointerEvents = 'auto';
+                            firstCard = null;
+                            secondCard = null;
+                        }, 500);
+                    }
+                }
+            });
+
+            gameBoard.appendChild(Card);
+        });
+
+
+    </script>
+</body>
+
+</html>

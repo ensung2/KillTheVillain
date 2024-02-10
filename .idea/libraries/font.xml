@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="font">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/font/Jua.zip!/" />
+      <root url="jar://$PROJECT_DIR$/font/Kanit.zip!/" />
+      <root url="jar://$PROJECT_DIR$/font/Noto_Sans_KR.zip!/" />
+      <root url="jar://$PROJECT_DIR$/font/Permanent_Marker.zip!/" />
+      <root url="jar://$PROJECT_DIR$/font/Gluten.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
