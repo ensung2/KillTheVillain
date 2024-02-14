@@ -5,3 +5,6 @@ D
 MAIN/Shooting_G.html,6\0\60be1d2f9a7aa002e26e394484e942676ae341f7
 A
 후보/game_03.js,d\b\db48d58ca8e8c0408e7c86b7b1c778dc7e56552d
+:
+
+index.html,f\6\f6013a00b362253c64368d6eebc50ea2131754e2
